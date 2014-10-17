@@ -1,7 +1,7 @@
 {
   "name": "metrics-process",
   "version": "0.0.0",
-  "description": "Utility to get process metrics.",
+  "description": "Utility to get current process metrics.",
   "author": {
     "name": "Athan Reines",
     "email": "kgryte@gmail.com"
