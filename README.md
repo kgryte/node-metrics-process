@@ -13,7 +13,7 @@ $ npm install metrics-process
 
 ## Usage
 
-The module exports a single method, which returns an `object` containing `pid`, `heap`, `lag`, `ram`, and `uptime` metrics. To use the utility,
+The module exports a single method, which returns an `object` containing `pid`, `heap`, `lag`, `RAM`, and `uptime` metrics. To use the utility,
 
 ``` javascript
 var getMetrics = require( 'metrics-process' ),
