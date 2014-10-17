@@ -86,12 +86,12 @@ The decimal percentage of utilized [heap](http://en.wikipedia.org/wiki/Memory_ma
 
 #### mem.memUsed
 
-The amount of memory used by the processed. This metric is reported in `kilobytes`.
+The amount of memory used by the process. This metric is reported in `kilobytes`.
 
 
 #### mem.utilization
 
-Utilized memory as a fraction of total system memory.
+Used memory as a fraction of total system memory.
 
 
 #### cpu.utilization
@@ -114,12 +114,14 @@ for ( var i = 0; i < 10; i++ ) {
 }
 
 function onTimeout() {
-	getMetrics( function onMetrics( error, metrics ) {
-		if ( error ) {
-			throw new Error( error );
-		}
-		console.log( JSON.stringify( metrics ) );
-	});
+	getMetrics( onMetrics );
+}
+
+function onMetrics( error, metrics ) {
+	if ( error ) {
+		throw new Error( error );
+	}
+	console.log( JSON.stringify( metrics ) );
 }
 ```
 
