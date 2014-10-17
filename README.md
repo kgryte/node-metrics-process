@@ -68,7 +68,7 @@ The total amount of memory from which newly created objects can originate. This 
 
 #### heapUtilization
 
-The decimal percentage of [heap](http://en.wikipedia.org/wiki/Memory_management) space which is utilized.
+The decimal percentage of utilized [heap](http://en.wikipedia.org/wiki/Memory_management) space.
 
 
 #### lag
