@@ -13,11 +13,17 @@ $ npm install metrics-process
 
 ## Usage
 
-The module exports a single method, which returns an `object` containing `pid`, `heap`, `lag`, `RAM`, and `uptime` metrics. To use the utility,
+The module exports a single method, which returns a metrics `object` to a provided callback. To use the utility,
 
 ``` javascript
-var getMetrics = require( 'metrics-process' ),
-	metrics = getMetrics();
+var getMetrics = require( 'metrics-process' );
+
+getMetrics( function onMetrics( error, metrics ) {
+	if ( error ) {
+		throw new Error( error );
+	}
+	console.log( JSON.stringify( metrics ) );
+});
 ```
 
 The following is an example metrics output...
@@ -26,10 +32,17 @@ The following is an example metrics output...
 {
 	"pid": 14847,
 	"uptime": 0,
-	"rss": 10932.224,
-	"heapFree": 1934.048,
-	"heapTotal": 4083.456,
-	"heapUtilization": 0.5263698200739766,
+	"mem": {
+		"rss": 10932.224,
+		"heapFree": 1934.048,
+		"heapTotal": 4083.456,
+		"heapUtilization": 0.5263698200739766,
+		"memUsed": 13017.088,
+		"utilization": 0.00151824951171875
+	},
+	"cpu": {
+		"utilization": 0
+	},
 	"lag": 0
 }
 ```
@@ -51,24 +64,39 @@ The process id.
 The number of milliseconds the process has been running.
 
 
-#### rss
+#### mem.rss
 
 The [resident set size](http://en.wikipedia.org/wiki/Resident_set_size), which is the portion of memory held in RAM, as opposed to swap or disk. This metric is reported in `kilobytes`.
 
 
-#### heapFree
+#### mem.heapFree
 
 The amount of memory remaining from which newly created objects will originate. This metric is reported in `kilobytes`.
 
 
-#### heapTotal
+#### mem.heapTotal
 
 The total amount of memory from which newly created objects can originate. This metric is reported in `kilobytes`.
 
 
-#### heapUtilization
+#### mem.heapUtilization
 
 The decimal percentage of utilized [heap](http://en.wikipedia.org/wiki/Memory_management) space.
+
+
+#### mem.memUsed
+
+The amount of memory used by the processed. This metric is reported in `kilobytes`.
+
+
+#### mem.utilization
+
+Utilized memory as a fraction of total system memory.
+
+
+#### cpu.utilization
+
+A decimal percentage describing how much the process utilizes the CPU.
 
 
 #### lag
@@ -86,7 +114,12 @@ for ( var i = 0; i < 10; i++ ) {
 }
 
 function onTimeout() {
-	JSON.stringify( getMetrics() );
+	getMetrics( function onMetrics( error, metrics ) {
+		if ( error ) {
+			throw new Error( error );
+		}
+		console.log( JSON.stringify( metrics ) );
+	});
 }
 ```
 

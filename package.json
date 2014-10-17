@@ -30,6 +30,7 @@
     "util"
   ],
   "dependencies": {
+    "pidusage": "^0.1.0",
     "toobusy": "^0.2.4"
   },
   "devDependencies": {

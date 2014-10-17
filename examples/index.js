@@ -1,9 +1,12 @@
 var getMetrics = require( './../lib' );
 
 // Get the process metrics:
-var metrics = getMetrics();
+getMetrics( function onMetrics( error, metrics ) {
+	if ( error ) {
+		throw new Error( error );
+	}
+	console.log( JSON.stringify( metrics ) );
 
-console.log( JSON.stringify( metrics ) );
-
-// Force the process to exit (toobusy will continue to run):
-process.exit( -1 );
+	// Force the process to exit (toobusy will continue to run):
+	process.exit( -1 );
+});

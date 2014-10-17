@@ -21,7 +21,17 @@ describe( 'metrics-process', function tests() {
 
 	// SETUP //
 
-	var metrics = lib();
+	var metrics;
+
+	before( function ( done ) {
+		lib( function onMetrics( error, m ) {
+			if ( error ) {
+				throw new Error( error );
+			}
+			metrics = m;
+			done();
+		});
+	});
 
 
 	// TESTS //
@@ -47,13 +57,21 @@ describe( 'metrics-process', function tests() {
 	});
 
 	it( 'should return heap metrics', function test() {
-		expect( metrics.heapFree ).to.be.a( 'number' );
-		expect( metrics.heapTotal ).to.be.a( 'number' );
-		expect( metrics.heapUtilization ).to.be.a( 'number' );
+		expect( metrics.mem.heapFree ).to.be.a( 'number' );
+		expect( metrics.mem.heapTotal ).to.be.a( 'number' );
+		expect( metrics.mem.heapUtilization ).to.be.a( 'number' );
 	});
 
 	it( 'should return RAM usage', function test() {
-		expect( metrics.rss ).to.be.a( 'number' );
+		expect( metrics.mem.rss ).to.be.a( 'number' );
+	});
+
+	it( 'should return memory utilization', function test() {
+		expect( metrics.mem.utilization ).to.be.a( 'number' );
+	});
+
+	it( 'should return CPU utilization', function test() {
+		expect( metrics.cpu.utilization ).to.be.a( 'number' );
 	});
 
 });
