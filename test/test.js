@@ -74,4 +74,6 @@ describe( 'metrics-process', function tests() {
 		expect( metrics.cpu.utilization ).to.be.a( 'number' );
 	});
 
+	it( 'should throw an error if unable to collect CPU and memory data' );
+
 });
