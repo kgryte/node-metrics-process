@@ -8,7 +8,7 @@ Process Metrics
 ## Installation
 
 ``` bash
-$ npm install metrics-os
+$ npm install metrics-process
 ```
 
 ## Usage
