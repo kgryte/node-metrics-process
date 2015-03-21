@@ -1,7 +1,6 @@
-var getMetrics = require( './../lib' );
+'use strict';
 
-// Get the process metrics:
-getMetrics( onMetrics );
+var getMetrics = require( './../lib' );
 
 function onMetrics( error, metrics ) {
 	if ( error ) {
@@ -12,3 +11,6 @@ function onMetrics( error, metrics ) {
 	// Force the process to exit (toobusy will continue to run):
 	process.exit( -1 );
 }
+
+// Get the process metrics:
+getMetrics( onMetrics );

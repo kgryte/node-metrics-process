@@ -27,17 +27,22 @@
     "metrics",
     "performance",
     "utility",
-    "util"
+    "util",
+    "utils",
+    "lag"
   ],
   "dependencies": {
     "pidusage": "^0.1.0",
     "toobusy-js": "^0.4.0"
   },
   "devDependencies": {
-    "chai": "1.x.x",
+    "chai": "2.x.x",
     "coveralls": "^2.11.1",
     "istanbul": "^0.3.0",
-    "mocha": "2.x.x"
+    "jshint": "2.x.x",
+    "jshint-stylish": "^1.0.0",
+    "mocha": "2.x.x",
+    "proxyquire": "^1.4.0"
   },
   "engines": {
     "node": ">= 0.10.0"

@@ -13,20 +13,26 @@ $ npm install metrics-process
 
 ## Usage
 
-The module exports a single method, which returns a metrics `object` to a provided callback. To use the utility,
-
 ``` javascript
 var getMetrics = require( 'metrics-process' );
+```
 
-getMetrics( function onMetrics( error, metrics ) {
+#### getMetrics( clbk )
+
+Gets the current process metrics and invokes a provided callback. The callback should accept two arguments: `error` and `metrics`.
+
+``` javascript
+function onMetrics( error, metrics ) {
 	if ( error ) {
 		throw new Error( error );
 	}
 	console.log( JSON.stringify( metrics ) );
-});
+}
+
+getMetrics( onMetrics );
 ```
 
-The following is an example metrics output...
+If no `error` is encountered while getting process metrics, `error` is `null`. The `metrics` object is comprised as follows:
 
 ``` javascript
 {
@@ -104,6 +110,7 @@ A decimal percentage describing how much the process utilizes the CPU.
 The average number of milliseconds a request has to wait in Node's event queue before being processed. An excess lag means that the process is overloaded. See [node-toobusy](https://github.com/lloyd/node-toobusy) for more information.
 
 
+
 ## Examples
 
 ``` javascript
@@ -142,7 +149,7 @@ Metrics names mirror the conventions set forth in [doc-metrix](https://github.co
 
 ### Unit
 
-Unit tests use the [Mocha](http://visionmedia.github.io/mocha) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
+Unit tests use the [Mocha](http://mochajs.org) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
 
 ``` bash
 $ make test
@@ -167,15 +174,15 @@ $ make view-cov
 
 
 
+---
 ## License
 
 [MIT license](http://opensource.org/licenses/MIT). 
 
 
----
 ## Copyright
 
-Copyright &copy; 2014. Athan Reines.
+Copyright &copy; 2014-2015. Athan Reines.
 
 
 [npm-image]: http://img.shields.io/npm/v/metrics-process.svg

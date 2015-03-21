@@ -1,8 +1,13 @@
+/* global require, describe, it, before */
+'use strict';
 
 // MODULES //
 
 var // Expectation library:
 	chai = require( 'chai' ),
+
+	// Module for stubbing required modules:
+	proxyquire = require( 'proxyquire' ),
 
 	// Module to be tested:
 	lib = require( './../lib' );
@@ -17,7 +22,6 @@ var expect = chai.expect,
 // TESTS //
 
 describe( 'metrics-process', function tests() {
-	'use strict';
 
 	// SETUP //
 
@@ -74,6 +78,28 @@ describe( 'metrics-process', function tests() {
 		expect( metrics.cpu.utilization ).to.be.a( 'number' );
 	});
 
-	it( 'should throw an error if unable to collect CPU and memory data' );
+	it( 'should throw an error if unable to collect CPU and memory data', function test( done ) {
+		var stubs, lib;
+
+		stubs = {
+			'pidusage': {
+				'stat': function onStat( pid, clbk ) {
+					var err = new Error( 'error' );
+					clbk( err );
+				}
+			},
+		};
+
+		// Proxy the `pidusage` module so it throws an error...
+		lib = proxyquire( './../lib', stubs );
+
+		// Call the module:
+		lib( onMetrics );
+
+		function onMetrics( error ) {
+			assert.ok( error, 'no error returned.' );
+			done();
+		}
+	});
 
 });
